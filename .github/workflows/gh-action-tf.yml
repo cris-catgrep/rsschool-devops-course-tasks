@@ -1,0 +1,12 @@
+name: Terraform deployment
+run-name: ${{ github.actor }} is running Terraform actions
+on: [pull_request]
+jobs:
+  tf-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: hashicorp/setup-terraform@v3
