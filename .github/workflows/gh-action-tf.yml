@@ -1,7 +1,7 @@
 # Action which checks if Terraform is installed and repository initialized in local host
 name: Terraform deployment
 run-name: ${{ github.actor }} is running Terraform actions
-permmissions:
+permissions:
   id-token: write
   contents: read
 on: [push]
