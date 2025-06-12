@@ -1,7 +1,7 @@
-variable "credentials"{
+variable "credentials" {
   default = ["~/.aws/credentials"]
 }
 
-variable "region"{
+variable "region" {
   default = "us-east-2"
 }

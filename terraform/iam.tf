@@ -1,11 +1,11 @@
 # Deploy IAM role for github actions
-resource "aws_iam_role" "GithubActionsRole"{
- name = "GithubActionsRole"
- description = "Necesary permissions for the GitHubActionsRole role"
+resource "aws_iam_role" "GithubActionsRole" {
+  name        = "GithubActionsRole"
+  description = "Necesary permissions for the GitHubActionsRole role"
 
- # Terraform's "jsonencode" function converts a
- # Terraform expression result to valid JSON syntax.
- assume_role_policy = jsonencode({
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -33,6 +33,6 @@ resource "aws_iam_role_policy_attachment" "github_attachment" {
     "arn:aws:iam::aws:policy/IAMFullAccess",
   ])
 
-  role = aws_iam_role.GithubActionsRole.name
+  role       = aws_iam_role.GithubActionsRole.name
   policy_arn = each.value
 }

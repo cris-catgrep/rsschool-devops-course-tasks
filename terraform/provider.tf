@@ -1,7 +1,7 @@
 # Define provider and region
 provider "aws" {
   profile = "captain"
-  region = var.region
+  region  = var.region
   # Define a path to the aws credentials
   shared_credentials_files = var.credentials
 }
@@ -12,16 +12,16 @@ terraform {
 
   # Configure S3 bucket as backend
   backend "s3" {
-    bucket = "rschool-tfstates"
-    key = "state/terraform.tfstate"
-    region = "us-east-2"
-    encrypt = true
+    bucket         = "rschool-tfstates"
+    key            = "state/terraform.tfstate"
+    region         = "us-east-2"
+    encrypt        = true
     dynamodb_table = "tf_lockid"
   }
 
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "~> 5.0"
     }
   }
