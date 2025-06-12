@@ -12,6 +12,12 @@ jobs:
       - name: Install
         uses: hashicorp/setup-terraform@v3
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
+          aws-region: us-east-2
+
   tf-plan:
     runs-on: ubuntu-latest
     needs: tf-check
