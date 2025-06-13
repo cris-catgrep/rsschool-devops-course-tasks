@@ -10,8 +10,6 @@ on:
      - main
      - task_1
 jobs:
-  defaults:
-    working-directory: ./terraform/
   tf-check:
     runs-on: ubuntu-latest
     steps:
@@ -29,6 +27,8 @@ jobs:
 
   tf-plan:
     runs-on: ubuntu-latest
+    defaults:
+      working-directory: ./terraform/
     needs: tf-check
     steps:
       - name: Checkout
