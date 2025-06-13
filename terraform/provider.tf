@@ -1,6 +1,6 @@
 # Define provider and region
 provider "aws" {
-  region  = var.region
+  region = var.region
   # Define a path to the aws credentials
   #shared_credentials_files = var.credentials
 }
