@@ -5,17 +5,24 @@ resource "aws_iam_role" "GithubActionsRole" {
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
-  assume_role_policy = jsonencode({a
-    Version = "2012-10-17"
-    Statement = [
+  assume_role_policy = jsonencode({
+    Version : "2012-10-17",
+    Statement : [
       {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "ec2.amazonaws.com"
+        Effect : "Allow",
+        Principal : {
+          Federated : "arn:aws:iam::378084047153:oidc-provider/token.actions.githubusercontent.com"
+        },
+        Action : "sts:AssumeRoleWithWebIdentity",
+        Condition : {
+          StringEquals : {
+            "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
+          },
+          StringLike : {
+            "token.actions.githubusercontent.com:sub" : "repo:cris-catgrep/rsschool-devops-course-tasks:*"
+          }
         }
-      },
+      }
     ]
   })
 }
