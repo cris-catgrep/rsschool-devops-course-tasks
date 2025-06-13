@@ -44,6 +44,9 @@ jobs:
           role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
           aws-region: us-east-2
 
+      - name: debug
+        run: terraform -v get remote config
+        
       - name: tf init
         run: |
           terraform init
