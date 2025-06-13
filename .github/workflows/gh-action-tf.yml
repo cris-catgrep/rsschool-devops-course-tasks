@@ -48,8 +48,6 @@ jobs:
         run: |
           terraform init
           terraform plan
-
-      - name: debug
-        run: terraform -v get remote config
+          terraform -v get remote config
  
 
