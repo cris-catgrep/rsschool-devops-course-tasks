@@ -42,9 +42,10 @@ jobs:
           aws-region: us-east-2
 
         -name: list
-        run: |
-          ls
-          pwd
+        run: ls
+
+        -name: list
+        run: pwd
 
       - name: tf init
         run: terraform init
