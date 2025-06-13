@@ -72,5 +72,7 @@ jobs:
 
       - name: tf apply
         run: |
+          terraform init
+          terraform plan
           terraform apply
  
