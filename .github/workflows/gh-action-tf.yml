@@ -4,7 +4,11 @@ run-name: ${{ github.actor }} is running Terraform actions
 permissions:
   id-token: write
   contents: read
-on: [push]
+  on:
+    push:
+      branches: 
+      - main
+      - task_1
 jobs:
   tf-check:
     runs-on: ubuntu-latest
