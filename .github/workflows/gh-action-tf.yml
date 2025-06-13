@@ -24,6 +24,8 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
           aws-region: us-east-2
+      - name: Terraform syntax check
+        run: terraform fmt
 
   tf-plan:
     runs-on: ubuntu-latest
@@ -44,10 +46,31 @@ jobs:
           role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
           aws-region: us-east-2
 
-      - name: tf init
+      - name: tf init and plan
         run: |
           terraform init
           terraform plan
-          terraform -v get remote config
- 
 
+  tf-apply:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform/
+    needs: [tf-check, tf-plan]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
+          aws-region: us-east-2
+
+      - name: tf apply
+        run: |
+          terraform apply
+ 
