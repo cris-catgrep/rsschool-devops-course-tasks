@@ -16,9 +16,12 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "rschool-tfstates"
 }
 
 # Create an ACL for the S3 bucket to be private
-resource "aws_s3_bucket_acl" "rschool-tfstates-private-acl" {
+resource "aws_s3_bucket_ownership_controls" "rschool-tfstates-ownership" {
   bucket = aws_s3_bucket.rschool-tfstates.id
-  acl    = "private"
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
 }
 
 # Enable versioning for the S3 bucket configured for the Terraform backend

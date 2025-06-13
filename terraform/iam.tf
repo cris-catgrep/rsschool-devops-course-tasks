@@ -28,8 +28,8 @@ resource "aws_iam_role" "GithubActionsRole" {
 }
 
 # Allow dynamodb minimum permissions to GithubActionsRole to be able to write to the tfstate file
-resourec "aws_iam_role_policy" "github_role_dynamodb_policy" {
-name = "dynamodb_policy"
+resource "aws_iam_role_policy" "github_role_dynamodb_policy" {
+  name = "dynamodb_policy"
   role = aws_iam_role.GithubActionsRole.id
 
   # Terraform's "jsonencode" function converts a
@@ -37,7 +37,7 @@ name = "dynamodb_policy"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      {
+      { 
         Action = [
            "dynamodb:DescribeTable",
            "dynamodb:GetItem",
@@ -50,6 +50,7 @@ name = "dynamodb_policy"
     ]
   })
 }
+
 # Attach pre-existing AWS policies required for the github actions role
 # This uses a for_each loop
 resource "aws_iam_role_policy_attachment" "github_attachment" {
