@@ -45,7 +45,7 @@ resource "aws_iam_role_policy" "github_role_dynamodb_policy" {
            "dynamodb:DeleteItem"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:dynamodb:::table/tf_lockid"
+        Resource = "arn:aws:dynamodb:*:*:table/tf_lockid"
       },
     ]
   })
