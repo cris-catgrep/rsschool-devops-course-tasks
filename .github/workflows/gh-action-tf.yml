@@ -45,9 +45,7 @@ jobs:
           aws-region: us-east-2
 
       - name: tf init
-        run: terraform init
-
-      - name: tf plan
-        run: terraform plan
-
+        run: |
+          terraform init
+          terraform plan
 
