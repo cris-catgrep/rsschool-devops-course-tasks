@@ -3,7 +3,7 @@ provider "aws" {
   profile = "captain"
   region  = var.region
   # Define a path to the aws credentials
-  shared_credentials_files = var.credentials
+  #shared_credentials_files = var.credentials
 }
 
 # Define terraform and aws provider minimum versions
@@ -12,6 +12,7 @@ terraform {
 
   # Configure S3 bucket as backend
   backend "s3" {
+    # You need a specific variables file for this section
     bucket         = "rschool-tfstates"
     key            = "state/terraform.tfstate"
     region         = "us-east-2"
