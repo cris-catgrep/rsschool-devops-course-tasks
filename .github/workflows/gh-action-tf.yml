@@ -10,6 +10,8 @@ on:
      - main
      - task_1
 jobs:
+  defaults:
+    working-directory: ./terraform/
   tf-check:
     runs-on: ubuntu-latest
     steps:
@@ -40,12 +42,6 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
           aws-region: us-east-2
-
-      - name: list
-        run: ls
-
-      - name: list
-        run: pwd
 
       - name: tf init
         run: terraform init
