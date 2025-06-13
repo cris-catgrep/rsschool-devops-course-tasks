@@ -41,10 +41,10 @@ jobs:
           role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
           aws-region: us-east-2
 
-        -name: list
+      - name: list
         run: ls
 
-        -name: list
+      - name: list
         run: pwd
 
       - name: tf init
