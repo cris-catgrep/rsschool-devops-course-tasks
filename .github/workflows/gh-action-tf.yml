@@ -28,7 +28,8 @@ jobs:
   tf-plan:
     runs-on: ubuntu-latest
     defaults:
-      working-directory: ./terraform/
+      run:
+        working-directory: ./terraform/
     needs: tf-check
     steps:
       - name: Checkout
