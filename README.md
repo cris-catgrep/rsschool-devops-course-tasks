@@ -35,7 +35,7 @@ Additional tasks:
      - AmazonSQSFullAccess
      - AmazonEventBridgeFullAccess
 
-  ![User perissions](/.visual_assets/user-permissions.png)
+  ![User permissions](/.visual_assets/user-permissions.png)
   
    - Configure MFA for both the new user and the root user.
    - Generate a new pair of Access Key ID and Secret Access Key for the user.
