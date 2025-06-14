@@ -1,7 +1,5 @@
 # Task 1: AWS Account Configuration
 
-![task_1 schema](../../visual_assets/task_1.png)
-
 ## Objective
 
 In this task, you will:
@@ -36,14 +34,20 @@ Additional tasks:
      - AmazonVPCFullAccess
      - AmazonSQSFullAccess
      - AmazonEventBridgeFullAccess
+
+  ![User perissions](/.visual_assets/user-permissions.png)
+  
    - Configure MFA for both the new user and the root user.
    - Generate a new pair of Access Key ID and Secret Access Key for the user.
+ ![MFA and keys](/.visual_assets/user-mfa.png)
 
 3. **Configure AWS CLI**
 
    - Configure AWS CLI to use the new user's credentials.
    - Verify the configuration by running the command: `aws ec2 describe-instance-types --instance-types t4g.nano`.
 
+ ![AWS cli output](/.visual_assets/aws-output.png)
+ 
 4. **Create a Github repository for your Terraform code**
 
    - Using your personal account create a repository `rsschool-devops-course-tasks`
@@ -51,8 +55,13 @@ Additional tasks:
 5. **Create a bucket for Terraform states**
 
    - Locking terraform state via DynamoDB is not required in this task, but recommended by the best practices. vvvv
+ ![DynamoDB](/.visual_assets/dynamodb.png)
+
    - [Managing Terraform states Best Practices](https://spacelift.io/blog/terraform-s3-backend)
    - [Terraform backend S3](https://developer.hashicorp.com/terraform/language/backend/s3)
+ ![s3 tfstate](/.visual_assets/s3-tfstate.png)
+
+ ![s3 properties](/.visual_assets/s3-properties.png)
 
 6. **Create an IAM role for Github Actions(Additional task)💫**
 
@@ -66,13 +75,19 @@ Additional tasks:
      - AmazonEventBridgeFullAccess
    - [Terraform resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)
 
+ ![Role](/.visual_assets/github-role.png)
+
 7. **Configure an Identity Provider and Trust policies for Github Actions(Additional task)💫**
 
    - Update the `GithubActionsRole` IAM role with a Trust policy following the next guides
+ ![Trust Policy](/.visual_assets/role-trust-policy.png)
+
    - [IAM roles terms and concepts](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html#id_roles_terms-and-concepts)
    - [Github tutorial](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
    - [AWS documentation on OIDC providers](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create_GitHub)
    - `GitHubOrg` is a Github `username` in this case
+ 
+ ![IDP](/.visual_assets/idp.png)
 
 8. **Create a Github Actions workflow for deployment via Terraform**
    - The workflow should have 3 jobs that run on pull request and push to the default branch:
@@ -83,6 +98,9 @@ Additional tasks:
    - [Github actions reference](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
    - [Setup terraform](https://github.com/hashicorp/setup-terraform)
    - [Configure AWS Credentials](https://github.com/aws-actions/configure-aws-credentials)
+
+ ![Github Actions](/.visual_assets/githubactions.png)
+
 
 ## Submission
 
