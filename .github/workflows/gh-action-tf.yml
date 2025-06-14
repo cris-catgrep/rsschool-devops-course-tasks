@@ -1,6 +1,7 @@
 # Action which checks if Terraform is installed and repository initialized in local host
 name: Terraform deployment
 run-name: ${{ github.actor }} is running Terraform actions
+# Necesary permissions for OpenID to work
 permissions:
   id-token: write
   contents: read
