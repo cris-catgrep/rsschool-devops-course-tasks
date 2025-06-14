@@ -24,7 +24,7 @@ Additional tasks:
    - Follow the instructions to install [Terraform 1.6+](https://developer.hashicorp.com/terraform/install?product_intent=terraform).
    - **optional** Configuring Terraform version manager [tfenv](https://github.com/tfutils/tfenv)
      
-   ![aws and tf versions](../../.visual_assets/aws-tf-versions.png)
+   ![aws and tf versions](/.visual_assets/aws-tf-versions.png)
 
 2. **Create IAM User and Configure MFA**
 
