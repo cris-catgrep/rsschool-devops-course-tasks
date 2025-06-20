@@ -7,9 +7,9 @@ variable "region" {
 }
 
 variable "az_01" {
-  default = "use2-az1"
+  default = "us-east-2a"
 }
 
 variable "az_02" {
-  default = "use2-az2"
+  default = "us-east-2b"
 }

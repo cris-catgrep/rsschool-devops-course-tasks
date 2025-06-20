@@ -37,12 +37,12 @@ resource "aws_iam_role_policy" "github_role_dynamodb_policy" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      { 
+      {
         Action = [
-           "dynamodb:DescribeTable",
-           "dynamodb:GetItem",
-           "dynamodb:PutItem",
-           "dynamodb:DeleteItem"
+          "dynamodb:DescribeTable",
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem"
         ]
         Effect   = "Allow"
         Resource = "arn:aws:dynamodb:*:*:table/tf_lockid"
