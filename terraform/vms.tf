@@ -27,6 +27,7 @@ resource "aws_instance" "BastionHost" {
   ami = data.aws_ami.amazon_linux_2.id
   instance_type = "t2.micro"
   subnet_id = aws_subnet.sub_01.id
+  private_ip = var.bastion_priv_ip
 
   tags = {
     Name      = "Bastion Host"
@@ -40,6 +41,7 @@ resource "aws_instance" "vm_sub_02" {
   ami = data.aws_ami.amazon_linux_2.id
   instance_type = "t2.micro"
   subnet_id = aws_subnet.sub_02.id
+  private_ip = var.vm_sub_02_priv_ip
 
   tags = {
     Name      = "Subnet 02 Host"
@@ -53,6 +55,7 @@ resource "aws_instance" "vm_sub_03" {
   ami = data.aws_ami.amazon_linux_2.id
   instance_type = "t2.micro"
   subnet_id = aws_subnet.sub_03.id
+  private_ip = var.vm_sub_03_priv_ip
 
   tags = {
     Name      = "Subnet 03 Host"
@@ -66,6 +69,7 @@ resource "aws_instance" "vm_sub_04" {
   ami = data.aws_ami.amazon_linux_2.id
   instance_type = "t2.micro"
   subnet_id = aws_subnet.sub_04.id
+  private_ip = var.vm_sub_04_priv_ip
 
   tags = {
     Name      = "Subnet 04 Host"
