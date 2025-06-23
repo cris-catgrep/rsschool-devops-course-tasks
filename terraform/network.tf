@@ -120,6 +120,12 @@ resource "aws_route_table" "route_table_private" {
     gateway_id = "local"
   }
 
+  # Default route to the NAT Gatewas/Bastion host
+  route {
+     network_interface_id = aws_instance.bastion_host.primary_network_interface_id
+     cidr_block = "0.0.0.0/0"
+  }
+
   tags = {
     Name      = "Private route table"
     Owner     = local.owner_name

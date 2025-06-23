@@ -18,19 +18,29 @@ data "aws_ami" "amazon_linux_2" {
 # Create Elastic IP for Bastion instance
 resource "aws_eip" "eip_bastion" {
   domain = "vpc"
-  instance = aws_instance.BastionHost.id
+  instance = aws_instance.bastion_host.id
   depends_on = [aws_internet_gateway.gw_01]
 }
 
 # Creating VMs
-resource "aws_instance" "BastionHost" {
+resource "aws_instance" "bastion_host" {
   ami = data.aws_ami.amazon_linux_2.id
+  source_dest_check = false
   instance_type = "t2.micro"
   subnet_id = aws_subnet.sub_01.id
   private_ip = var.bastion_priv_ip
+  key_name = aws_key_pair.ssh_key_pair.key_name
+  user_data = <<-EOF
+	# Turning on IP Forwarding
+	echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.conf
+	sudo sysctl -p
+
+	# Making a catchall rule for routing and masking the private IP
+	sudo iptables -t nat -A POSTROUTING -o ens5 -s 0.0.0.0/0 -j MASQUERADE
+	EOF
 
   tags = {
-    Name      = "Bastion Host"
+    Name      = "Bastion and NAT Host"
     Owner     = local.owner_name
     Project   = local.tag_project
     Terraform = true

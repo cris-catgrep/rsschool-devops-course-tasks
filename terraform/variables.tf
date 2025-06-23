@@ -29,3 +29,20 @@ variable "vm_sub_03_priv_ip" {
 variable "vm_sub_04_priv_ip" {
   default = "10.0.13.10"
 }
+
+# Home IP, change depending on location
+variable "home_ip" {
+  default = "200.68.167.14"
+}
+
+variable "public-key-path" {
+  type = string
+  default = "ssh/ec2-bastion.pub"
+}
+variable "private-key-path" {
+  type = string
+  default = "ssh/ec2-bastion.pem"
+}
+variable "key-nam" {
+  default = "ec2-bastion"
+}
