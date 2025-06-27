@@ -1,0 +1,80 @@
+# Action which checks if Terraform is installed and repository initialized in local host
+name: Terraform deployment
+run-name: ${{ github.actor }} is running Terraform actions
+# Necesary permissions for OpenID to work
+permissions:
+  id-token: write
+  contents: read
+on:
+  push:
+    branches: 
+     - main
+     - task_1
+     - task_2
+jobs:
+  tf-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
+          aws-region: us-east-2
+      - name: Terraform syntax check
+        run: terraform fmt
+
+  tf-plan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform/
+    needs: tf-check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
+          aws-region: us-east-2
+
+      - name: tf init and plan
+        run: |
+          terraform init
+          terraform plan
+
+  tf-apply:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform/
+    needs: [tf-check, tf-plan]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::378084047153:role/GithubActionsRole
+          aws-region: us-east-2
+
+      - name: tf apply
+        run: |
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+ 
